@@ -18,6 +18,10 @@ colnum = 0
 data = []
 #data.append([])
 
+# Do some sweet plotting
+print "Welcome to SexyPlot, we will be happy to serve you some of the"
+print "hottest plots on the market."
+
 with open(sys.argv[1], 'rb') as csvfile:
     spamreader = csv.reader(csvfile, delimiter=',')
     for row in spamreader:
@@ -25,22 +29,19 @@ with open(sys.argv[1], 'rb') as csvfile:
             header = row
             print header
         else:
-            print "Rownumber: %d" % rownum
+            #print "Rownumber: %d" % rownum
             data.append([])
             colnum=0
-            for col in row:                
+            for col in row:
                 data[rownum-1].append(float(col))
                 colnum += 1
-                
+
         rownum += 1
-    
+
 
 data_array = asarray(data)
 s = shape(data_array)
 
-# Do some sweet plotting
-print "Welcome to SexyPlot, we will be happy to serve you some of the"
-print "hottest plots on the market."
 
 ifig = 0
 legends = []
@@ -56,14 +57,14 @@ while True:
         if user_input in col:
             x = data_array[:,colnum]
         colnum += 1
-        
+
     # Get y-axis
     print "y to plot", header
     user_input = raw_input([":"])
     if user_input == "q":
         quit()
-    
-    colnum = 0  
+
+    colnum = 0
     for col in header:
         if user_input in col:
             y = data_array[:,colnum]
@@ -73,7 +74,7 @@ while True:
     # Add stuff to plot
     figure(ifig)
     pyplot.plot(x,y)
-    legends.append(leg)    
+    legends.append(leg)
 
     # Plot?
     print "Plot? y/n"
@@ -89,12 +90,11 @@ while True:
         legends = []
         ifig += 1
         figure(ifig)
-        
+
 
 #for x in xrange(1,s[1]):
 #    figure(x)
 #    pyplot.plot(data_array[:,0],data_array[:,x])
 #    pyplot.legend([header[x]],"upper left")
-#    
+#
 #pyplot.show()
-
